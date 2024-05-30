@@ -1,25 +1,32 @@
-[gd_scene load_steps=6 format=3 uid="uid://8t8mpsuu8d1p"]
+[gd_scene load_steps=5 format=3 uid="uid://8t8mpsuu8d1p"]
 
 [ext_resource type="Script" path="res://scenes/levels/level.gd" id="1_fdiw5"]
+[ext_resource type="Texture2D" uid="uid://b0hqr5q4pr6d7" path="res://graphics/objects/gate.png" id="2_7oyxv"]
 [ext_resource type="PackedScene" uid="uid://c5jk4t5mkdqru" path="res://scenes/player/player.tscn" id="4_4x7b8"]
-[ext_resource type="PackedScene" uid="uid://dx810ijfdhww7" path="res://scenes/enemies/Drone.tscn" id="4_sb8x3"]
-[ext_resource type="PackedScene" uid="uid://c2ja1wj7q25mj" path="res://scenes/objects/bed.tscn" id="5_4me8y"]
-[ext_resource type="PackedScene" uid="uid://dhsw2m26qg55e" path="res://scenes/objects/bilboard.tscn" id="5_ymek0"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4nj7x"]
+size = Vector2(853.176, 181.042)
 
 [node name="Level" type="Node2D"]
 script = ExtResource("1_fdiw5")
 
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+position = Vector2(567, -392)
+scale = Vector2(0.922436, 0.922436)
+
+[node name="Gate" type="Sprite2D" parent="StaticBody2D"]
+texture = ExtResource("2_7oyxv")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D"]
+polygon = PackedVector2Array(-1425.57, -771.869, -1432.08, 577.818, -1367.03, 707.908, -1264.04, 766.449, -371.842, 777.29, -368.589, 604.92, -97.5677, 591.911, 479.166, 594.079, 485.671, 777.29, 1356.19, 770.785, 1487.37, 719.833, 1554.58, 573.482, 1553.5, -778.374)
+
+[node name="Area2D" type="Area2D" parent="StaticBody2D"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D/Area2D"]
+position = Vector2(54.7463, 784.878)
+shape = SubResource("RectangleShape2D_4nj7x")
+
 [node name="Player" parent="." instance=ExtResource("4_4x7b8")]
-position = Vector2(782, 380)
+position = Vector2(584, 439)
 
-[node name="bed" parent="." instance=ExtResource("5_4me8y")]
-position = Vector2(975, 104)
-scale = Vector2(0.545, 0.545)
-
-[node name="DroneStaticBody2D" parent="." instance=ExtResource("4_sb8x3")]
-position = Vector2(144, 289)
-
-[node name="Node2D" parent="." instance=ExtResource("5_ymek0")]
-position = Vector2(97, 566)
-rotation = 0.846184
-scale = Vector2(0.65778, 0.65778)
+[connection signal="body_entered" from="StaticBody2D/Area2D" to="." method="_on_area_2d_body_entered"]
