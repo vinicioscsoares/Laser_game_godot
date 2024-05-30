@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://8t8mpsuu8d1p"]
+[gd_scene load_steps=6 format=3 uid="uid://8t8mpsuu8d1p"]
 
 [ext_resource type="Script" path="res://scenes/levels/level.gd" id="1_fdiw5"]
 [ext_resource type="PackedScene" uid="uid://c5jk4t5mkdqru" path="res://scenes/player/player.tscn" id="4_4x7b8"]
-[ext_resource type="PackedScene" uid="uid://dx810ijfdhww7" path="res://scenes/objects/Drone.tscn" id="4_sb8x3"]
+[ext_resource type="PackedScene" uid="uid://dx810ijfdhww7" path="res://scenes/enemies/Drone.tscn" id="4_sb8x3"]
 [ext_resource type="PackedScene" uid="uid://c2ja1wj7q25mj" path="res://scenes/objects/bed.tscn" id="5_4me8y"]
+[ext_resource type="PackedScene" uid="uid://dhsw2m26qg55e" path="res://scenes/objects/bilboard.tscn" id="5_ymek0"]
 
 [node name="Level" type="Node2D"]
 script = ExtResource("1_fdiw5")
@@ -15,5 +16,10 @@ position = Vector2(782, 380)
 position = Vector2(975, 104)
 scale = Vector2(0.545, 0.545)
 
-[node name="StaticBody2D" parent="." instance=ExtResource("4_sb8x3")]
-position = Vector2(208, 93)
+[node name="DroneStaticBody2D" parent="." instance=ExtResource("4_sb8x3")]
+position = Vector2(144, 289)
+
+[node name="Node2D" parent="." instance=ExtResource("5_ymek0")]
+position = Vector2(97, 566)
+rotation = 0.846184
+scale = Vector2(0.65778, 0.65778)
